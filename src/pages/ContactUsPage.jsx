@@ -1,11 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import bgImage from "../assets/PlayGroup-Img1.png";
 import leftImage from "../assets/study.png";
 import Duck from "../assets/duck.png";
 import bird from "../assets/Bird.png";
+import { useLocation } from "react-router-dom";
 
 const ContactUs = () => {
   const [selectedClass, setSelectedClass] = useState("");
+  const contactSectionRef = useRef(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state?.scrollToContact && contactSectionRef.current) {
+      contactSectionRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [location]);
+
+  const scrollToContact = () => {
+    if (contactSectionRef.current) {
+      contactSectionRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
 
   // email function
@@ -15,6 +30,7 @@ const ContactUs = () => {
     const phone = document.querySelector('[name="phone"]').value.trim();
     const email = document.querySelector('[name="email"]').value.trim();
     const message = document.querySelector('[name="message"]').value.trim();
+    const selectedClassLabel = selectedClass || "Not selected";
 
     //name
     if (student.length > 30) {
@@ -50,6 +66,7 @@ const ContactUs = () => {
 Student Name: ${student}
 Phone Number: ${phone}
 Parent Email: ${email}
+Selected Class: ${selectedClassLabel}
 Message: ${message}
     `;
 
@@ -92,7 +109,10 @@ Message: ${message}
               We're here to answer your questions and support your family’s journey with us.
             </p>
 
-            <button className="mt-8 bg-yellow-400 hover:scale-105 transition px-8 py-3 rounded-full font-semibold text-black shadow-lg hover:shadow-[0_0_40px_rgba(250,204,21,0.8)]">
+            <button
+              className="mt-8 bg-yellow-400 hover:scale-105 transition px-8 py-3 rounded-full font-semibold text-black shadow-lg hover:shadow-[0_0_40px_rgba(250,204,21,0.8)]"
+              onClick={scrollToContact}
+            >
               Get In Touch
             </button>
 
@@ -115,7 +135,10 @@ Message: ${message}
 
 
       {/* ================= CONTACT SECTION ================= */}
-      <section className="bg-[#020c6f] py-24 px-6 relative overflow-hidden">
+      <section
+        ref={contactSectionRef}
+        className="bg-[#020c6f] py-24 px-6 relative overflow-hidden"
+      >
 
         {/* Floating Glow */}
         <div className="absolute w-[400px] h-[400px] bg-pink-500/20 blur-[120px] rounded-full -top-20 -left-20"></div>
@@ -156,7 +179,7 @@ Message: ${message}
             <form className="bg-white/10 backdrop-blur-xl p-10 rounded-3xl border border-white/20 shadow-2xl space-y-6">
 
               <h2 className="text-3xl font-bold text-white text-center">
-                Send Us a Message
+                Admission Details
               </h2>
 
               <input

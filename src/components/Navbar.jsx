@@ -63,7 +63,7 @@ const Navbar = () => {
         {/* RIGHT SIDE */}
         <div className="hidden md:block">
           <button
-            onClick={() => navigate("/contact-us")}
+            onClick={() => navigate("/contact-us", { state: { scrollToContact: true } })}
             className="flex items-center gap-2 bg-pink-500 text-white px-5 py-2 rounded-full font-semibold shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
           >
             Admission Now!
@@ -95,7 +95,7 @@ const Navbar = () => {
 
           <button
             onClick={() => {
-              navigate("/contact-us");
+              navigate("/contact-us", { state: { scrollToContact: true } });
               setIsOpen(false);
             }}
             className="w-full bg-pink-500 text-white py-2 rounded-full font-semibold"
@@ -109,4 +109,3 @@ const Navbar = () => {
 };
 
 export default Navbar
-
